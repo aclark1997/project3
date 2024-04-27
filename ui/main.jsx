@@ -5,7 +5,7 @@ async function main() {
   const rootElt = document.getElementById("app");
   const root = createRoot(rootElt);
 
-  root.render(React.createElement("h1", null, "Hello From React!"));
+  root.render(React.createElement("h1", null, "I'm In Hell"));
 }
 
 window.onload=main
