@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.future import select
+from fastapi.responses import HTMLResponse
 
 from models import AutoModels
 
@@ -28,6 +29,26 @@ app = FastAPI(lifespan=lifespan)
 async def root():
     return {"message": "Hello World"}
 
+
+@app.get("/film/{id}", response_class=HTMLResponse)
+async def film(id: int):
+    with open("ui/dist/film.html") as file:
+        return file.read()
+
+@app.get("/api/v1/film/{id}")
+async def api_film(id: int):
+    Film = await auto_models.get("film")
+    result = {}
+    
+    async with AsyncSession(engine) as session:
+        film = await session.execute(select(Film).where(Film.film_id == id))
+        scalar = film.scalar()
+        result = scalar #{
+            #"title": scalar.title,
+            #"description": scalar.description,
+            #"id": scalar.film_id
+        #}
+    return result
 
 @app.get("/api/v1/films")
 async def films():
