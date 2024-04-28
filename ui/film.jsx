@@ -1,6 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
+async function delete_film(){
+	console.log("test");
+}
+
 async function main() {
   //const filmsResponse = await fetch("/api/v1/films");
   //const films = await filmsResponse.json();

@@ -8,6 +8,7 @@
   <body>
     <a href="/">Home</a>
     <br />
+    <button onclick="fetch('/api/v1'+window.location.pathname, { method: 'DELETE' }).then(()=>{window.location='/'})">Delete</button>
     <div id="app" />
   </body>
 </html>
